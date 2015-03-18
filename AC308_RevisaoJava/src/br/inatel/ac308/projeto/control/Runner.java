@@ -28,19 +28,19 @@ public class Runner {
 		try {
 			contaEduardo.sacar(2);
 		} catch (IllegalArgumentException i) {
-			mainFrame.print("Valor Negativo!");
+			mainFrame.print("Invalido: Valor de saque Negativo!");
 		} catch (SaldoInsuficienteException s) {
-			mainFrame.print("Saldo Insufuciente!");
+			mainFrame.print("Saldo Insufuciente para este valor de saque!");
 		}
 		try {
 			contaEduardo.depositar(30);
 		} catch(IllegalArgumentException i) {
-			mainFrame.print("Erro ao depositar");
+			mainFrame.print("Invalido: Valor de deposito Negativo!");
 		}
 		try {
 			contaEduardo.transferirPara(contaMaria, 20);
 		} catch (IllegalArgumentException i) {
-			mainFrame.print("Erro ao fazer a transferencia: Valor invalido!");
+			mainFrame.print("Erro ao fazer a transferencia: Valor negativo!");
 		} catch (SaldoInsuficienteException s) {
 			mainFrame.print("Erro ao fazer a transferencia: Saldo Insuficiente!");
 		}
