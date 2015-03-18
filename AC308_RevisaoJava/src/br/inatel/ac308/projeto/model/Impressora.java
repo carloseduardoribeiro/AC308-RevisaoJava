@@ -5,23 +5,34 @@ import java.util.ArrayList;
 public class Impressora {
 	
 	private ArrayList<ImpressaoExtrato> itens = new ArrayList<>();
+	private int cont = 0;
 	
-	public boolean enfileiramento(ImpressaoExtrato c) {
+	public boolean enfileiramento(ImpressaoExtrato c)  throws IllegalAccessException {
+		boolean result = false;
+		if(c != null) {
+			this.itens.add(c);
+			cont++;
+			result = true;
+		} else {
+			throw new IllegalAccessException("Erro no enfileiramento: Atributo nulo");
+		}
 		
-		
-		return false;
+		return result;
 	}
 	
 	public String gerarRelatorio() {
+		StringBuilder result = new StringBuilder();
 		
+		for(ImpressaoExtrato impressaoExtrato : this.itens) {
+			result.append(impressaoExtrato.gerarExtrato()).append("\n");
+		}
 		
-		return null;
+		return result.toString();
 	}
 	
 	public int getQuantidadeContas() {
 		
-		
-		return 0;
+		return this.cont;
 	}
 }
 
