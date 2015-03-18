@@ -67,19 +67,22 @@ public class Conta implements ImpressaoExtrato{
 		return result;
 	}
 	
-	public boolean transferirPara(Conta c, float valor) {
+	public boolean transferirPara(Conta c, float valor) throws SaldoInsuficienteException {
 		boolean result = false;
 		
 		if(valor <= 0) {
 			throw new IllegalArgumentException("Valor para transferencia Ilegal!!!");
 		} else {
-			c.depositar(valor);
-			result = true;
+			if(valor < this.getSaldo()) {
+				this.sacar(valor);
+				c.depositar(valor);
+				result = true;
+			} else {
+				throw new SaldoInsuficienteException("Transferencia não permitida. Saldo insuficiente!");
+			}
 		}
 		return result;
 	}
-	
-	
 }
 
 
