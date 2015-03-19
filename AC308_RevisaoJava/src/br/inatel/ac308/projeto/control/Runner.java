@@ -1,52 +1,88 @@
 package br.inatel.ac308.projeto.control;
 
-import br.inatel.ac308.projeto.model.Conta;
-import br.inatel.ac308.projeto.model.SaldoInsuficienteException;
+import java.util.ArrayList;
+
+import br.inatel.ac308.projeto.model.AlunoGraduacao;
+import br.inatel.ac308.projeto.model.AlunoPos;
+import br.inatel.ac308.projeto.model.EquipeDePesquisa;
+import br.inatel.ac308.projeto.model.Pesquisador;
+import br.inatel.ac308.projeto.model.Professor;
 import br.inatel.ac308.projeto.view.MainFrame;
 
 public class Runner {
 	
 	public static void main(String[] args) {
-		String extrato;
 		MainFrame mainFrame = new MainFrame();
 		
+		EquipeDePesquisa equipeDePesquisa = new EquipeDePesquisa();
 		
-		Conta contaEduardo = new Conta(10, "Eduardo", (float)100.100);
-		Conta contaMaria = new Conta(11, "Maria", (float)111.111);
-		Conta contaJoao = new Conta(12, "Joao", (float)120.120);
+		/*************************************  Cadastros *************************************/
+		AlunoGraduacao alunoGraduacaoEduardo = new AlunoGraduacao("Eduardo", 111, "eduardo@inatel.com");
+		ArrayList<Float> notasEduardo = new ArrayList<>();
+		notasEduardo.add((float)10.0);
+		notasEduardo.add((float)10.0);
+		notasEduardo.add((float)7.0);
 		
-		mainFrame.print("Cadastro Eduardo: ");
+		AlunoGraduacao alunoGraduacaoMaria = new AlunoGraduacao("Maria", 222, "maria@inatel.com");
+		ArrayList<Float> notasMaria = new ArrayList<>();
+		notasMaria.add((float)10.0);
+		notasMaria.add((float)10.0);
+		notasMaria.add((float)4.0);
 		
-		extrato = contaEduardo.gerarExtrato();
-		mainFrame.print(extrato);
-		mainFrame.print(""); // Pular uma linha - Para Efeito Visual
+		AlunoGraduacao alunoGraduacaoJose = new AlunoGraduacao("Jose", 333, "jose@inatel.com");
+		ArrayList<Float> notasJose = new ArrayList<>();
+		notasJose.add((float)10.0);
+		notasJose.add((float)10.0);
+		notasJose.add((float)1.0);
 		
-		mainFrame.print("Saque de R$2,00");
-		mainFrame.print("Deposito de R$30,00");
-		mainFrame.print("Trafeir para Maria: R$20,00");
-		mainFrame.print("Resultado:");
-		try {
-			contaEduardo.sacar(2);
-		} catch (IllegalArgumentException i) {
-			mainFrame.print("Invalido: Valor de saque Negativo!");
-		} catch (SaldoInsuficienteException s) {
-			mainFrame.print("Saldo Insufuciente para este valor de saque!");
+		
+		AlunoPos alunoPosJoao = new AlunoPos("Joao", 444, "joao@inatel.com");
+		ArrayList<Integer> conceitosJoao = new ArrayList<>();
+		conceitosJoao.add(100);
+		conceitosJoao.add(90);
+		conceitosJoao.add(80);
+		
+		AlunoPos alunoPosRita = new AlunoPos("Rita", 555, "rita@inatel.com");
+		ArrayList<Integer> conceitosRita = new ArrayList<>();
+		conceitosRita.add(90);
+		conceitosRita.add(80);
+		conceitosRita.add(70);
+		
+		AlunoPos alunoPosAna = new AlunoPos("Ana", 666, "ana@inatel.com");
+		ArrayList<Integer> conceitosAna = new ArrayList<>();
+		conceitosAna.add(80);
+		conceitosAna.add(70);
+		conceitosAna.add(60);
+		
+		Professor professorDaniel = new Professor("Daniel", "Engenharia de Telecominicações", 2);
+		Professor professorCarlos = new Professor("Carlos", "Engenharia Elétrica", 5);
+		Professor professorRodolfo = new Professor("Rodolfo", "Engenharia da Computação", 10);
+		
+		/************************************* Adicionar Pesquisadores *************************************/
+		equipeDePesquisa.adicionarPesquisador(alunoPosAna);
+		equipeDePesquisa.adicionarPesquisador(alunoPosJoao);
+		equipeDePesquisa.adicionarPesquisador(alunoPosRita);
+		equipeDePesquisa.adicionarPesquisador(professorCarlos);
+		equipeDePesquisa.adicionarPesquisador(professorDaniel);
+		equipeDePesquisa.adicionarPesquisador(professorRodolfo);
+		
+		/************************************* Adicionar Alunos *************************************/
+		
+		/************************************* Geração dos resultados *************************************/
+		mainFrame.print("##########Pesquisadores#########");
+		for(Pesquisador pesquisador : equipeDePesquisa.getPesquisadores()) {
+			mainFrame.print(pesquisador.gerarCurriculo());
+			mainFrame.print("Conceito Geral: " + Integer.toString(pesquisador.conceitoGeral()));
+			mainFrame.print("\n");
 		}
-		try {
-			contaEduardo.depositar(30);
-		} catch(IllegalArgumentException i) {
-			mainFrame.print("Invalido: Valor de deposito Negativo!");
-		}
-		try {
-			contaEduardo.transferirPara(contaMaria, 20);
-		} catch (IllegalArgumentException i) {
-			mainFrame.print("Erro ao fazer a transferencia: Valor negativo!");
-		} catch (SaldoInsuficienteException s) {
-			mainFrame.print("Erro ao fazer a transferencia: Saldo Insuficiente!");
-		}
-		extrato = contaEduardo.gerarExtrato();
-		mainFrame.print(extrato);
-		mainFrame.print(""); // Pular uma linha - Para Efeito Visual
 	}
-
 }
+
+
+
+
+
+
+
+
+
