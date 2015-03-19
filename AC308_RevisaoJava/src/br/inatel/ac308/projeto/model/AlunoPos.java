@@ -17,7 +17,8 @@ public class AlunoPos extends Aluno implements Pesquisador{
 		result.append("Curriculo AlunoPos: ").append("\n");
 		result.append("Nome: ").append(super.getNome()).append("\n");
 		result.append("Matricula: ").append(super.getMatricula()).append("\n");
-		result.append("Email: ").append(super.getEmail());
+		result.append("Email: ").append(super.getEmail()).append("\n");
+		result.append("Conceitos: ").append(conceitos);
 		
 		return result.toString();
 	}

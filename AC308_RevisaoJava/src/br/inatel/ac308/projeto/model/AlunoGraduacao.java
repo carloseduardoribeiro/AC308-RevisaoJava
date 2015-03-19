@@ -31,4 +31,24 @@ public class AlunoGraduacao extends Aluno{
 		return result;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder result = new StringBuilder();
+		
+		result.append("Nome: ").append(super.getNome()).append("\n");
+		result.append("Matricula: ").append(super.getMatricula()).append("\n");
+		result.append("Email: ").append(super.getEmail()).append("\n");
+		result.append("Notas: ").append(notas);
+		return result.toString();
+	}
 }
+
+
+
+
+
+
+
+
+
+

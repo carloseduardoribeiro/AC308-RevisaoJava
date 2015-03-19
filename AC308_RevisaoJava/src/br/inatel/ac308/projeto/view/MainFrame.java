@@ -13,6 +13,7 @@ public class MainFrame {
 	private void initialize() {
 		System.out.println("######Segunda entrega do projeto de AC308######");
 		System.out.println("   ######Primeiro semestre de 2015!!!######");
+		System.out.println("");
 	}
 	
 	public void print(String mensagem) {

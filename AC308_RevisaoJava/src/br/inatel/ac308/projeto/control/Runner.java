@@ -2,6 +2,7 @@ package br.inatel.ac308.projeto.control;
 
 import java.util.ArrayList;
 
+import br.inatel.ac308.projeto.model.Aluno;
 import br.inatel.ac308.projeto.model.AlunoGraduacao;
 import br.inatel.ac308.projeto.model.AlunoPos;
 import br.inatel.ac308.projeto.model.EquipeDePesquisa;
@@ -14,45 +15,40 @@ public class Runner {
 	public static void main(String[] args) {
 		MainFrame mainFrame = new MainFrame();
 		
+		ArrayList<Aluno> alunos = new ArrayList<>(); // Arraylist para armazenar os alunos cadastrados
+		
 		EquipeDePesquisa equipeDePesquisa = new EquipeDePesquisa();
 		
 		/*************************************  Cadastros *************************************/
 		AlunoGraduacao alunoGraduacaoEduardo = new AlunoGraduacao("Eduardo", 111, "eduardo@inatel.com");
-		ArrayList<Float> notasEduardo = new ArrayList<>();
-		notasEduardo.add((float)10.0);
-		notasEduardo.add((float)10.0);
-		notasEduardo.add((float)7.0);
+		alunoGraduacaoEduardo.adicionarNota(80);
+		alunoGraduacaoEduardo.adicionarNota(80);
+		alunoGraduacaoEduardo.adicionarNota(80);
 		
 		AlunoGraduacao alunoGraduacaoMaria = new AlunoGraduacao("Maria", 222, "maria@inatel.com");
-		ArrayList<Float> notasMaria = new ArrayList<>();
-		notasMaria.add((float)10.0);
-		notasMaria.add((float)10.0);
-		notasMaria.add((float)4.0);
+		alunoGraduacaoMaria.adicionarNota(50);
+		alunoGraduacaoMaria.adicionarNota(50);
+		alunoGraduacaoMaria.adicionarNota(50);
 		
 		AlunoGraduacao alunoGraduacaoJose = new AlunoGraduacao("Jose", 333, "jose@inatel.com");
-		ArrayList<Float> notasJose = new ArrayList<>();
-		notasJose.add((float)10.0);
-		notasJose.add((float)10.0);
-		notasJose.add((float)1.0);
-		
+		alunoGraduacaoJose.adicionarNota(80);
+		alunoGraduacaoJose.adicionarNota(70);
+		alunoGraduacaoJose.adicionarNota(60);
 		
 		AlunoPos alunoPosJoao = new AlunoPos("Joao", 444, "joao@inatel.com");
-		ArrayList<Integer> conceitosJoao = new ArrayList<>();
-		conceitosJoao.add(100);
-		conceitosJoao.add(90);
-		conceitosJoao.add(80);
+		alunoPosJoao.adicionarConceitos(100);
+		alunoPosJoao.adicionarConceitos(90);
+		alunoPosJoao.adicionarConceitos(80);
 		
 		AlunoPos alunoPosRita = new AlunoPos("Rita", 555, "rita@inatel.com");
-		ArrayList<Integer> conceitosRita = new ArrayList<>();
-		conceitosRita.add(90);
-		conceitosRita.add(80);
-		conceitosRita.add(70);
+		alunoPosRita.adicionarConceitos(90);
+		alunoPosRita.adicionarConceitos(80);
+		alunoPosRita.adicionarConceitos(70);
 		
 		AlunoPos alunoPosAna = new AlunoPos("Ana", 666, "ana@inatel.com");
-		ArrayList<Integer> conceitosAna = new ArrayList<>();
-		conceitosAna.add(80);
-		conceitosAna.add(70);
-		conceitosAna.add(60);
+		alunoPosAna.adicionarConceitos(80);
+		alunoPosAna.adicionarConceitos(70);
+		alunoPosAna.adicionarConceitos(60);
 		
 		Professor professorDaniel = new Professor("Daniel", "Engenharia de Telecominicações", 2);
 		Professor professorCarlos = new Professor("Carlos", "Engenharia Elétrica", 5);
@@ -67,12 +63,35 @@ public class Runner {
 		equipeDePesquisa.adicionarPesquisador(professorRodolfo);
 		
 		/************************************* Adicionar Alunos *************************************/
+		alunos.add(alunoGraduacaoJose);
+		alunos.add(alunoGraduacaoMaria);
+		alunos.add(alunoGraduacaoEduardo);
+		alunos.add(alunoPosAna);
+		alunos.add(alunoPosRita);
+		alunos.add(alunoPosJoao);
 		
 		/************************************* Geração dos resultados *************************************/
 		mainFrame.print("##########Pesquisadores#########");
 		for(Pesquisador pesquisador : equipeDePesquisa.getPesquisadores()) {
 			mainFrame.print(pesquisador.gerarCurriculo());
 			mainFrame.print("Conceito Geral: " + Integer.toString(pesquisador.conceitoGeral()));
+			mainFrame.print("\n");
+		}
+		
+		mainFrame.print("##########Alunos#########");
+		for(Aluno aluno : alunos) {
+			if(aluno instanceof AlunoGraduacao) {
+				mainFrame.print(aluno.toString());
+			} else {
+				AlunoPos alunoPos = (AlunoPos) aluno;
+				mainFrame.print(alunoPos.gerarCurriculo());
+				mainFrame.print("Conceito Geral: " + Integer.toString(alunoPos.conceitoGeral()));
+			}
+			if(aluno.aprovado()) {
+				mainFrame.print("Aluno Aprovado!!!");
+			} else {
+				mainFrame.print("Aluno Reprovado!!!");
+			}
 			mainFrame.print("\n");
 		}
 	}
